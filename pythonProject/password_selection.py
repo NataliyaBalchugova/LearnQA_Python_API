@@ -13,4 +13,4 @@ for p in passwords:
         cookies.update({'auth_cookie': cookie_value})
     response2 = requests.post("https://playground.learnqa.ru/ajax/api/check_auth_cookie", cookies=cookies)
     if response2.text == "You are authorized":
-        print(f"Верный пароль: {p}")
+        print(f"Верный пароль {p}")
