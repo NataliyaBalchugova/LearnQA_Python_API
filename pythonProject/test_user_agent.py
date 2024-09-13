@@ -33,7 +33,6 @@ def test_user_agent(data):
     expected_values = data["expected_values"]
     response = requests.get(url, headers={"User-Agent": user_agent})
     resp_json = response.json()
-    print(resp_json)
     assert resp_json["platform"] == expected_values["platform"]
     assert resp_json["browser"] == expected_values["browser"]
     assert resp_json["device"] == expected_values["device"]
