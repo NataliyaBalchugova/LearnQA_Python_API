@@ -4,7 +4,6 @@ from lib.base_case import BaseCase
 
 url = 'https://playground.learnqa.ru/api/user/'
 
-
 class TestUserRegister(BaseCase):
 
     def prepare_data(self, email='vinkotov@example.com', first_name='learnqa', last_name='learnqa', password='123',
