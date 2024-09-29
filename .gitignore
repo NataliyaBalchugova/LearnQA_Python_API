@@ -162,3 +162,5 @@ cython_debug/
 .idea
 .pytest_cache
 __pyache__/
+logs/*
+test_results/
