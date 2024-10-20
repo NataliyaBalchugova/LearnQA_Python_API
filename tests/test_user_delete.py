@@ -1,10 +1,13 @@
 import requests
-
+import allure
 from lib.assertions import Assertions
 from lib.base_case import BaseCase
 
 
+@allure.epic("Deletion cases")
 class TestUserDelete(BaseCase):
+    @allure.description("This test removes an authorized user")
+    @allure.severity(allure.severity_level.NORMAL)
     def test_delete_user(self):
         login_data = {
             'email': 'vinkotov@example.com',
@@ -24,6 +27,8 @@ class TestUserDelete(BaseCase):
 
         Assertions.assert_code_status(response2, 400)
 
+    @allure.description("This test deletes the user and allows you to verify that he was deleted")
+    @allure.severity(allure.severity_level.NORMAL)
     def test_delete_created_user(self):
         register_data = self.prepare_registraion_data()
         response3 = requests.post("https://playground.learnqa.ru/api/user/", data=register_data)
@@ -59,6 +64,8 @@ class TestUserDelete(BaseCase):
         )
         Assertions.assert_code_status(response5, 404)
 
+    @allure.description("This test removes a user while logged in by another user")
+    @allure.severity(allure.severity_level.NORMAL)
     def test_delete_user_as_another_user(self):
         register_data_1 = self.prepare_registraion_data()
         response6 = requests.post("https://playground.learnqa.ru/api/user/", data=register_data_1)
@@ -69,15 +76,17 @@ class TestUserDelete(BaseCase):
         user_id_1 = self.get_json_value(response6, "id")
         email_1 = register_data_1['email']
         password_1 = register_data_1['password']
-
+        print(email_1)
+        print(password_1)
         register_data_2 = self.prepare_registraion_data()
         response7 = requests.post("https://playground.learnqa.ru/api/user/", data=register_data_2)
 
         Assertions.assert_code_status(response7, 200)
         Assertions.assert_json_has_key(response7, "id")
-
         email_2 = register_data_2['email']
         password_2 = register_data_2['password']
+        print(email_2)
+        print(password_2)
 
         login_data_2 = {
             'email': email_2,

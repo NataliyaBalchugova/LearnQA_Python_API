@@ -1,10 +1,14 @@
+import allure
 import requests
 
 from lib.assertions import Assertions
 from lib.base_case import BaseCase
 
 
+@allure.epic("Edition cases")
 class TestUserEdit(BaseCase):
+    @allure.description("This test edit created user")
+    @allure.severity(allure.severity_level.NORMAL)
     def test_edit_just_created_user(self):
         # REGISTER
         register_data = self.prepare_registraion_data()
@@ -55,6 +59,8 @@ class TestUserEdit(BaseCase):
             "Wrong name of user after edit"
         )
 
+    @allure.description("This test edit unauthorized user")
+    @allure.severity(allure.severity_level.NORMAL)
     def test_edit_unauthorized_user(self):
         new_name = "Unauthorized user"
         user_id = 2
@@ -65,6 +71,8 @@ class TestUserEdit(BaseCase):
         )
         Assertions.assert_code_status(response5, 400)
 
+    @allure.description("This test edit another user")
+    @allure.severity(allure.severity_level.MINOR)
     def test_edit_another_user(self):
         register_data = self.prepare_registraion_data()
         response6 = requests.post("https://playground.learnqa.ru/api/user/", data=register_data)
@@ -95,6 +103,8 @@ class TestUserEdit(BaseCase):
 
         Assertions.assert_code_status(response8, 400)
 
+    @allure.description("This test edit user by invalid email")
+    @allure.severity(allure.severity_level.MINOR)
     def test_edit_invalid_email(self):
         register_data = self.prepare_registraion_data()
         response9 = requests.post("https://playground.learnqa.ru/api/user/", data=register_data)
@@ -127,6 +137,8 @@ class TestUserEdit(BaseCase):
 
         Assertions.assert_code_status(response11, 400)
 
+    @allure.description("This test edit user with short first name")
+    @allure.severity(allure.severity_level.MINOR)
     def test_edit_short_first_name(self):
         register_data = self.prepare_registraion_data()
         response12 = requests.post("https://playground.learnqa.ru/api/user/", data=register_data)
